@@ -9,6 +9,10 @@ RUN useradd -s /bin/bash dataiku \
     && mkdir -p /home/dataiku ${DSS_DATADIR} \
     && chown -Rh dataiku:dataiku /home/dataiku ${DSS_DATADIR}
 
+# gnupg ipv6 bug fix
+RUN mkdir ~/.gnupg \
+    && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
+
 # Install latest r version from CRAN
 RUN apt-get update \
     && apt-get install -y dirmngr software-properties-common apt-transport-https \
